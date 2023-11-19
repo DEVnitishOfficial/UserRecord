@@ -36,14 +36,18 @@ app.post('/api/user', async (req, res) => {
   try {
     const newUser = new User(req.body);
     await newUser.save();
-    res.status(201).json({ message: 'User details saved successfully!' });
+    res.status(201).json({
+      success : true,
+       message: 'User details saved successfully!' ,
+       newUser
+      });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 // API to fetch user details by name
-app.get('/api/user/:name', async (req, res) => {
+app.get('/api/user/xyz/:name', async (req, res) => {
   try {
     const user = await User.findOne({ name: req.params.name });
     if (user) {
